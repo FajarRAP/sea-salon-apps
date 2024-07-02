@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sea_submission/cred.dart';
 import 'package:sea_submission/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:sea_submission/features/auth/presentation/pages/login_page.dart';
 import 'package:sea_submission/features/dashboard/admin/pages/dashboard_admin_page.dart';
 import 'package:sea_submission/features/dashboard/customer/pages/dashboard_customer_page.dart';
 import 'package:sea_submission/features/home/home_page.dart';
+import 'package:sea_submission/features/reservation/presentation/cubit/reservation_cubit.dart';
 import 'package:sea_submission/features/review/presentation/cubit/review_cubit.dart';
 import 'package:sea_submission/inject.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => getIt<AuthCubit>()),
         BlocProvider(create: (context) => getIt<ReviewCubit>()),
+        BlocProvider(create: (context) => getIt<ReservationCubit>()),
       ],
       child: MaterialApp(
         title: 'SEA Salon',

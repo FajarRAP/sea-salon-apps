@@ -1,5 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:sea_submission/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:sea_submission/features/reservation/data/datasources/remote_datasources.dart';
+import 'package:sea_submission/features/reservation/data/repositories/reservation_repositories_impl.dart';
+import 'package:sea_submission/features/reservation/domain/repositories/reservation_repositories.dart';
+import 'package:sea_submission/features/reservation/domain/usecases/make_reservation_use_case.dart';
+import 'package:sea_submission/features/reservation/presentation/cubit/reservation_cubit.dart';
 import 'package:sea_submission/features/review/data/datasources/remote_datasources.dart';
 import 'package:sea_submission/features/review/data/repositories/review_repository_impl.dart';
 import 'package:sea_submission/features/review/domain/repositories/review_repository.dart';
@@ -51,4 +56,17 @@ void setup() {
 
   // Review Cubit
   getIt.registerLazySingleton(() => ReviewCubit(insertReviewUseCase: getIt()));
+
+  // Reservation
+  getIt.registerLazySingleton<ReservationRemoteDataSources>(
+      () => ReservationRemoteDataSourcesImpl(getIt()));
+  getIt.registerLazySingleton<ReservationRepositories>(
+      () => ReservationRepositoriesImpl(getIt()));
+
+  // Reservation Use Case
+  getIt.registerLazySingleton(() => MakeReservationUseCase(getIt()));
+
+  // Reservation Cubit
+  getIt.registerLazySingleton(
+      () => ReservationCubit(makeReservationUseCase: getIt()));
 }

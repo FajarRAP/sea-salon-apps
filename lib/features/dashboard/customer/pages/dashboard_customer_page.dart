@@ -4,6 +4,7 @@ import 'package:sea_submission/core/common/snackbar.dart';
 import 'package:sea_submission/features/auth/presentation/cubit/auth_cubit.dart'
     as c;
 import 'package:sea_submission/features/auth/presentation/pages/login_page.dart';
+import 'package:sea_submission/features/reservation/presentation/pages/reservation_page.dart';
 import 'package:sea_submission/features/review/presentation/pages/review_page.dart';
 import 'package:sea_submission/inject.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -28,26 +29,37 @@ class DashboardCustomerPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Customer'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ReviewPage())),
-              child: const Text('Give Review'),
-            ),
-            ElevatedButton(
-              onPressed: authCubit.logout,
-              child: BlocBuilder<c.AuthCubit, c.AuthState>(
-                builder: (context, state) {
-                  if (state is c.SessionDestroying) {
-                    return const CircularProgressIndicator();
-                  }
-                  return const Text('Logout');
-                },
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ReviewPage())),
+                child: const Text('Give Review'),
               ),
-            ),
-          ],
+              ElevatedButton(
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ReservationPage())),
+                child: const Text('Make Reservation'),
+              ),
+              ElevatedButton(
+                onPressed: authCubit.logout,
+                child: BlocBuilder<c.AuthCubit, c.AuthState>(
+                  builder: (context, state) {
+                    if (state is c.SessionDestroying) {
+                      return const CircularProgressIndicator();
+                    }
+                    return const Text('Logout');
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
