@@ -1,15 +1,28 @@
 # sea_submission
 
-## Cara Menjalankan Aplikasi Ini (Saya berasumsi bahwa panitia telah menginstall emulator dan flutter sdk)
+## Cara Menjalankan Aplikasi Ini 
+*(Asumsi: Panitia telah menginstall emulator dan Flutter SDK)*
+### Langkah-langkah:
+1. **Clone Repository**
+   ```bash
+   git clone <repository-url>
+2. **Buka terminal di folder project kemudian get dependencies**
+   ```bash
+   flutter pub get
+3. **Masih di terminal yang sama jalankan project**
+   ```bash
+   flutter run
+4. **Pilih device tujuan**
+   
+## Untuk Login
 
-### 1. Clone Repository
-### 2. Buka terminal di direktori project kemudian ketikan perintah flutter pub get
-### 3. ketikan perintah flutter run di terminal yang sama
-### 4. Pilih device tujuan
+**Admin:**
+- Email: `admin@gmail.com`
+- Password: `admin12345`
 
-## untuk login admin menggunakan email admin@gmail.com dan password admin12345
-## untuk usernya silakan register saja
+**User:**
+- Silakan register terlebih dahulu.
 
-## Fitur yang belum selesai
-### - Reservasi (gagal encode object ke time)
-### - Dashboard admin belum bisa ngapa-ngapain (bisa masuk doang dan logout doang)
+## Fitur yang Belum Selesai
+- **Reservasi:** Gagal encode object ke time.
+- **Dashboard Admin:** Hanya bisa login dan logout, fitur lainnya belum tersedia.
