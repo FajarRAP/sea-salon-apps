@@ -7,7 +7,11 @@ final class AuthInitial extends AuthState {}
 
 class LoginAuthenticating extends AuthState {}
 
-class LoginAuthenticated extends AuthState {}
+class LoginAuthenticated extends AuthState {
+  final User user;
+
+  LoginAuthenticated(this.user);
+}
 
 class LoginError extends AuthState {
   final String message;

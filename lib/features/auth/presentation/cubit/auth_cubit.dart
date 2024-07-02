@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:sea_submission/features/auth/domain/usecases/login_use_case.dart';
 import 'package:sea_submission/features/auth/domain/usecases/logout_use_case.dart';
 import 'package:sea_submission/features/auth/domain/usecases/register_use_case.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'auth_state.dart';
 
@@ -17,20 +18,16 @@ class AuthCubit extends Cubit<AuthState> {
   final RegisterUseCase registerUseCase;
   final LogoutUseCase logoutUseCase;
 
+  User? currentUser;
+
   Future<void> login(String email, String password) async {
     emit(LoginAuthenticating());
 
     final result = await loginUseCase.execute(email, password);
 
     result.fold(
-      (l) {
-        print(l.message);
-        emit(LoginError(l.message));
-      },
-      (r) {
-        print(r);
-        emit(LoginAuthenticated());
-      },
+      (failure) => emit(LoginError(failure.message)),
+      (success) => emit(LoginAuthenticated(success)),
     );
   }
 
@@ -39,15 +36,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(RegisterAuthenticating());
 
     final result = await registerUseCase.execute(email, name, phone, password);
+
     result.fold(
-      (l) {
-        print(l.message);
-        emit(RegisterError(l.message));
-      },
-      (r) {
-        print(r);
-        emit(RegisterAuthenticated());
-      },
+      (failure) => emit(RegisterError(failure.message)),
+      (success) => emit(RegisterAuthenticated()),
     );
   }
 
@@ -57,6 +49,5 @@ class AuthCubit extends Cubit<AuthState> {
     await logoutUseCase.execute();
 
     emit(SessionDestroyed());
-    
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sea_submission/cred.dart';
 import 'package:sea_submission/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:sea_submission/features/auth/presentation/pages/login_page.dart';
-import 'package:sea_submission/features/dashboard/presentation/admin/pages/dashboard_admin_page.dart';
+import 'package:sea_submission/features/dashboard/admin/pages/dashboard_admin_page.dart';
+import 'package:sea_submission/features/dashboard/customer/pages/dashboard_customer_page.dart';
+import 'package:sea_submission/features/home/home_page.dart';
 import 'package:sea_submission/inject.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final role =
+        getIt<SupabaseClient>().auth.currentSession?.user.userMetadata?['role'];
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<AuthCubit>()),
@@ -39,9 +43,11 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: getIt<SupabaseClient>().auth.currentSession != null
-            ? const DashboardAdminPage()
-            : const LoginPage(),
+        home: role == 0
+            ? const DashboardCustomerPage()
+            : role == 1
+                ? const DashboardAdminPage()
+                : const HomePage(),
       ),
     );
   }

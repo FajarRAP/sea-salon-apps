@@ -20,6 +20,8 @@ class AuthRepositoriesImpl extends AuthRepositories {
       }
 
       return Left(Failure());
+    } on AuthException catch (ae) {
+      return Left(Failure(message: ae.message));
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }
@@ -36,6 +38,8 @@ class AuthRepositoriesImpl extends AuthRepositories {
       }
 
       return Left(Failure());
+    } on AuthException catch (ae) {
+      return Left(Failure(message: ae.message));
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }
