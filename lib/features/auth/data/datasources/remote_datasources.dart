@@ -28,7 +28,7 @@ class AuthRemoteDataSourcesImpl extends AuthRemoteDataSources {
         data: {
           'name': name,
           'phone': phone,
-          'role': 1,
+          'role': 0,
         },
       );
 

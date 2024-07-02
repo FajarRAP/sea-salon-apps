@@ -6,6 +6,7 @@ import 'package:sea_submission/features/auth/presentation/pages/login_page.dart'
 import 'package:sea_submission/features/dashboard/admin/pages/dashboard_admin_page.dart';
 import 'package:sea_submission/features/dashboard/customer/pages/dashboard_customer_page.dart';
 import 'package:sea_submission/features/home/home_page.dart';
+import 'package:sea_submission/features/review/presentation/cubit/review_cubit.dart';
 import 'package:sea_submission/inject.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -14,7 +15,7 @@ Future<void> main() async {
     url: supabaseUrl,
     anonKey: anonKey,
   );
-  await setup();
+  setup();
   runApp(const MyApp());
 }
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<AuthCubit>()),
+        BlocProvider(create: (context) => getIt<ReviewCubit>()),
       ],
       child: MaterialApp(
         title: 'SEA Salon',

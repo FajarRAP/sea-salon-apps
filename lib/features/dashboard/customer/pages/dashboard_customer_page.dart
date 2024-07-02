@@ -34,7 +34,7 @@ class DashboardCustomerPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const ReviewPage())),
-              child: const Text('See User'),
+              child: const Text('Give Review'),
             ),
             ElevatedButton(
               onPressed: authCubit.logout,
